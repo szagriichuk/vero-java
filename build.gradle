@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'org.apache.httpcomponents:httpasyncclient:4.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.0'
+    testCompile 'junit:junit:4.12'
+}
