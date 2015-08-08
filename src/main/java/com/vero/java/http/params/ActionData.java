@@ -1,7 +1,6 @@
 package com.vero.java.http.params;
 
 import com.vero.java.model.ActionsData;
-import com.vero.java.model.BaseData;
 
 /**
  * @author szagriichuk.

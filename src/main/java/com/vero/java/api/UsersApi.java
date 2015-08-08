@@ -1,10 +1,11 @@
 package com.vero.java.api;
 
-import com.vero.java.model.BaseData;
+import com.vero.java.model.UsersData;
+import com.vero.java.model.VeroData;
 
 /**
  * @author szagriichuk.
  */
 public interface UsersApi {
-    void create(BaseData data);
+    void create(UsersData data);
 }

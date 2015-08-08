@@ -3,6 +3,5 @@ package com.vero.java.model;
 /**
  * @author szagriichuk.
  */
-public class ActionsData extends VeroData {
-
+public class StringData extends VeroData<String> {
 }

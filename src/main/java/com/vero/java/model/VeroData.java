@@ -5,8 +5,8 @@ import java.util.HashMap;
 /**
  * @author szagriichuk.
  */
-public class BaseData extends HashMap<String, String>{
-    public void add(String name, String value){
+public class VeroData<T> extends HashMap<String, T>{
+    public void add(String name, T value){
         put(name, value);
     }
 }

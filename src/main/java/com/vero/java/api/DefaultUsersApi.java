@@ -1,41 +1,71 @@
 package com.vero.java.api;
 
-import com.vero.java.http.HttpExecutor;
-import com.vero.java.http.ResponseCallback;
-import com.vero.java.http.url.Urls;
-import com.vero.java.http.url.uri.BaseUrl;
-import com.vero.java.http.url.uri.Track;
-import com.vero.java.http.url.uri.Users;
-import com.vero.java.http.url.uri.Version2;
-import com.vero.java.model.BaseData;
+import com.vero.java.http.HttpException;
+import com.vero.java.http.HttpMethod;
+import com.vero.java.http.callback.ErrorResponseCallback;
+import com.vero.java.http.url.UrlBuilder;
+import com.vero.java.model.UsersData;
+import com.vero.java.model.VeroData;
 import com.vero.java.serializer.Serializer;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.nio.entity.NStringEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
+
+import static com.vero.java.http.HttpExecutor.execute;
+import static com.vero.java.http.url.Uris.*;
 
 /**
  * @author szagriichuk.
  */
 public class DefaultUsersApi implements UsersApi {
-    @Override
-    public void create(BaseData data) {
-        HttpPost post = new HttpPost(Urls.nw().of(new BaseUrl()).of(new Version2()).of(new Users()).of(new Track()).build());
-        try {
-            post.setEntity(new StringEntity(Serializer.serialize(data)));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        HttpExecutor.execute(post, new ResponseCallback<Object>() {
-            @Override
-            public void onComplete(Object value) {
-                //TODO
-            }
 
+    private static final Logger LOG = LoggerFactory.getLogger(UsersApi.class);
+
+    @Override
+    public void create(UsersData data) {
+        execute(createPostTrackHttpRequest(data), new ErrorResponseCallback() {
             @Override
             public void onError(Throwable throwable) {
-                //TODO
+                LOG.error("Cannot create user", throwable);
             }
         });
+    }
+
+    private HttpEntityEnclosingRequestBase createPostTrackHttpRequest(VeroData data) {
+        HttpEntityEnclosingRequestBase post = (HttpEntityEnclosingRequestBase) createHttpMethod(HttpMethod.POST, createTrackUrl());
+        HttpEntity entity = createEntity(data);
+        if (entity != null) {
+            post.setEntity(entity);
+        }
+        return post;
+    }
+
+    private HttpEntity createEntity(VeroData data) {
+        try {
+            return new NStringEntity(Serializer.serialize(data));
+        } catch (UnsupportedEncodingException e) {
+            LOG.error("Cannot create http request entity from String data.", e);
+        }
+
+        return null;
+    }
+
+    private String createTrackUrl() {
+        return UrlBuilder.start().of(BASE).of(VERSION).of(USERS).of(TRACK).build();
+    }
+
+    private HttpRequestBase createHttpMethod(HttpMethod method, String url) {
+        switch (method) {
+            case POST:
+                return new HttpPost(url);
+            default:
+                throw new HttpException("Canno create http method for input data: " + method);
+        }
     }
 }

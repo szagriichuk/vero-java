@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @author szagriichuk.
  */
-public class UsersData extends BaseData {
+public class UsersData extends StringData {
     @JsonIgnore
     private  final String email = "email";
     @JsonIgnore

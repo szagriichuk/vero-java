@@ -1,13 +1,12 @@
 package com.vero.java.http.params;
 
-import com.vero.java.model.BaseData;
-import com.vero.java.serializer.Serializer;
+import com.vero.java.model.VeroData;
 
 /**
  * @author szagriichuk.
  */
 public class Data extends BaseDataParam {
-    public Data(BaseData param) {
+    public Data(VeroData param) {
         super(param);
     }
 

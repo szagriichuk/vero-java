@@ -1,13 +1,13 @@
 package com.vero.java.http.params;
 
-import com.vero.java.model.BaseData;
+import com.vero.java.model.VeroData;
 
 /**
  * @author szagriichuk.
  */
 public class Changes extends BaseDataParam {
 
-    public Changes(BaseData param) {
+    public Changes(VeroData param) {
         super(param);
     }
 

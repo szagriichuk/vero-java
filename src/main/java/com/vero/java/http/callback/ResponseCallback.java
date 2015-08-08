@@ -1,4 +1,4 @@
-package com.vero.java.http;
+package com.vero.java.http.callback;
 
 /**
  * @author szagriichuk.
