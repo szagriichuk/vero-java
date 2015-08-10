@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 /**
  * @author szagriichuk.
  */
-public class AuthTokenTest extends BaseParamTest{
+public class AuthTokenTest extends StringBaseParameterTest{
 
     @Override
     Param<?> getParameter(String name) {

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 /**
  * @author szagriichuk.
  */
-public class EventNameTest extends BaseParamTest{
+public class EventNameTest extends StringBaseParameterTest{
 
     @Override
     Param<?> getParameter(String name) {

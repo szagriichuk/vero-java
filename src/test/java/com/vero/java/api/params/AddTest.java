@@ -3,7 +3,7 @@ package com.vero.java.api.params;
 /**
  * @author szagriichuk.
  */
-public class AddTest extends BaseParamTest {
+public class AddTest extends StringBaseParameterTest {
 
     @Override
     Param<?> getParameter(String name) {

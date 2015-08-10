@@ -6,7 +6,7 @@ package com.vero.java.api.params;
 public class NewIdTest extends IntegerBaseParamTest {
 
     @Override
-    Param<?> getParameter(String name) {
-        return new NewId(getParam(name));
+    Param<?> getParameter(Integer id) {
+        return new NewId(id);
     }
 }

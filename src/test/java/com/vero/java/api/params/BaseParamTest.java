@@ -6,15 +6,15 @@ import org.junit.Test;
 /**
  * @author szagriichuk.
  */
-public abstract class BaseParamTest {
+public abstract class BaseParamTest<T> {
     @Test
-    public void testAddName() throws Exception {
-        Param param = getParameter("value");
+    public void testRealName() throws Exception {
+        Param param = getParameter(getParamValue());
         Assert.assertEquals(getExpected(param), param.toString());
     }
 
     @Test
-    public void testAddNullName() throws Exception {
+    public void testNullName() throws Exception {
         Param param = getParameter(null);
         Assert.assertEquals(getExpected(param), param.toString());
     }
@@ -23,6 +23,8 @@ public abstract class BaseParamTest {
         return param.paramName() + "=" + param.param;
     }
 
-    abstract Param<?> getParameter(String name);
+    abstract Param<?> getParameter(T value);
+
+    abstract T getParamValue();
 
 }
