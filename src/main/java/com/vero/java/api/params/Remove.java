@@ -1,6 +1,8 @@
-package com.vero.java.http.params;
+package com.vero.java.api.params;
 
 /**
+ * Represents {@code remove} parameter of the Vero API request.
+ *
  * @author szagriichuk.
  */
 public class Remove extends Param<String> {

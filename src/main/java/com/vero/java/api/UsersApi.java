@@ -1,11 +1,14 @@
 package com.vero.java.api;
 
-import com.vero.java.model.UsersData;
-import com.vero.java.model.VeroData;
+import com.vero.java.api.params.*;
 
 /**
  * @author szagriichuk.
  */
 public interface UsersApi {
-    void create(UsersData data);
+    void add(Id id, Email email, UserData data);
+
+    void update(Id id, Changes data);
+
+    void reidentify(Id id, NewId newId);
 }

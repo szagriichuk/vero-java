@@ -1,6 +1,8 @@
-package com.vero.java.http.params;
+package com.vero.java.api.params;
 
 /**
+ * Base abstraction of the Vero's parameters.
+ *
  * @author szagriichuk.
  */
 public abstract class Param<T> {

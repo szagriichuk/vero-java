@@ -1,6 +1,8 @@
-package com.vero.java.http.params;
+package com.vero.java.api.params;
 
 /**
+ * Represents {@code add} parameter of the Vero API request.
+ *
  * @author szagriichuk.
  */
 public class Add extends Param<String> {

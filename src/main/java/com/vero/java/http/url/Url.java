@@ -6,16 +6,17 @@ import java.util.List;
 /**
  * @author szagriichuk.
  */
-public final class UrlBuilder {
+public final class Url {
     private List<Uris> uris = new ArrayList<>();
 
-    private UrlBuilder() {
+    private Url() {
     }
 
-    public static UrlBuilder start(){
-        return new UrlBuilder();
+    public static Url start(){
+        return new Url();
     }
-    public UrlBuilder of(Uris uri) {
+
+    public Url of(Uris uri) {
         uris.add(uri);
         return this;
     }
@@ -26,7 +27,7 @@ public final class UrlBuilder {
             addParameter(builder, uris.get(i));
         }
         addLastParameter(builder, uris.get(uris.size() - 1));
-        uris.clear();
+
         return builder.toString();
     }
 
@@ -37,6 +38,4 @@ public final class UrlBuilder {
     private void addLastParameter(StringBuilder builder, Uris uri) {
         builder.append(uri);
     }
-
-
 }

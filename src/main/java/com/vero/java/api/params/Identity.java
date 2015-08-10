@@ -1,11 +1,12 @@
-package com.vero.java.http.params;
+package com.vero.java.api.params;
 
-import com.vero.java.model.VeroData;
 
 /**
+ * Represents {@code identity} parameter of the Vero API request.
+ *
  * @author szagriichuk.
  */
-public class Identity extends BaseDataParam {
+public class Identity extends ComplexParam {
     public Identity(VeroData param) {
         super(param);
     }
