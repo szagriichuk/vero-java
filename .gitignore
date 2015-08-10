@@ -1,6 +1,5 @@
 ## generic files to ignore
 *~
-*.lock
 *.DS_Store
 *.swp
 *.out
@@ -24,3 +23,9 @@ target/
 *.jar
 *.war
 *.ear
+
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
