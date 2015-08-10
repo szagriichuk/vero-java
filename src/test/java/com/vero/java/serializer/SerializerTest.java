@@ -1,6 +1,6 @@
 package com.vero.java.serializer;
 
-import com.vero.java.model.VeroData;
+import com.vero.java.api.params.VeroData;
 import org.junit.Assert;
 import org.junit.Test;
 
