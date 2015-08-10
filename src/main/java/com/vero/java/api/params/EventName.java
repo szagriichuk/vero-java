@@ -5,7 +5,7 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class EventName extends Param<String>{
+public class EventName extends StringParam{
     public EventName(String param) {
         super(param);
     }

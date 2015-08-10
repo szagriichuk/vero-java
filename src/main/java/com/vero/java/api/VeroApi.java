@@ -22,6 +22,6 @@ public class VeroApi extends Key {
     }
 
     public UsersApi users(){
-        return new DefaultUsersApi();
+        return new DefaultUsersApi(key);
     }
 }

@@ -15,6 +15,10 @@ public class DefaultUsersApi extends BaseHttpApi implements UsersApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(UsersApi.class);
 
+    public DefaultUsersApi(String key) {
+        super(key);
+    }
+
     @Override
     public void add(Id id, Email email, UserData data) {
         execute(createPostRequest(createPostDataString(id, email, data), TRACK), new ErrorResponseCallback() {

@@ -14,7 +14,7 @@ import com.vero.java.serializer.Serializer;
  *
  * @author szagriichuk.
  */
-public abstract class ComplexParam<T> extends Param<String> {
+public abstract class ComplexParam<T> extends StringParam {
     public ComplexParam(VeroData<T> param) {
         super(Serializer.serialize(param));
     }

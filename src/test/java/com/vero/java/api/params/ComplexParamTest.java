@@ -7,7 +7,7 @@ public abstract class ComplexParamTest extends BaseParamTest<VeroData<String>> {
     @Override
     VeroData<String> getParamValue() {
         VeroData<String> data = new VeroData<>();
-        data.add("test", "test1");
+        data.add(new FirstName("Test1"));
         return data;
     }
 }

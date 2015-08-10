@@ -5,7 +5,7 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class AuthToken extends Param<String> {
+public class AuthToken extends StringParam {
     public AuthToken(String param) {
         super(param);
     }

@@ -6,15 +6,15 @@ package com.vero.java.api.params;
  * @author szagriichuk.
  */
 public abstract class Param<T> {
-    T param;
+    T value;
 
     public Param(T param) {
-        this.param = param;
+        this.value = param;
     }
 
     @Override
     public String toString() {
-        return paramName() + "=" + param;
+        return paramName() + "=" + value;
     }
 
     protected abstract String paramName();

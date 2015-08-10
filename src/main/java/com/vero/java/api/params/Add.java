@@ -5,7 +5,7 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class Add extends Param<String> {
+public class Add extends StringParam {
     public Add(String param) {
         super(param);
     }

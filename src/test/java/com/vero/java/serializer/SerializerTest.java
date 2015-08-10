@@ -1,6 +1,6 @@
 package com.vero.java.serializer;
 
-import com.vero.java.api.params.VeroData;
+import com.vero.java.api.params.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,14 +11,14 @@ public class SerializerTest {
 
     @Test
     public void testSerialize() throws Exception {
-        VeroData<Object> veroData = new VeroData<>();
-        veroData.add("auth_token", "KEY");
-        veroData.add("id", "123123");
-        veroData.add("email", "test@test.com");
+        VeroData veroData = new VeroData();
+        veroData.add(new AuthToken("KEY"));
+        veroData.add(new Id(12345));
+        veroData.add(new Email("test@test.com"));
         VeroData<String> test = new VeroData<>();
-        test.add("firstname", "tets1");
-        test.add("lastname", "tets2");
-        veroData.add("data", test);
+        test.add(new FirstName("test1"));
+        test.add(new LastName("test2"));
+        veroData.add(new UserData(test));
         Assert.assertNotNull(Serializer.serialize(veroData));
     }
 }

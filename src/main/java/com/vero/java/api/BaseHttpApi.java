@@ -13,8 +13,12 @@ import java.io.UnsupportedEncodingException;
 /**
  * @author szagriichuk.
  */
-abstract class BaseHttpApi {
+abstract class BaseHttpApi extends Key{
     private static final Logger LOG = LoggerFactory.getLogger(BaseHttpApi.class);
+
+    public BaseHttpApi(String key) {
+        super(key);
+    }
 
     String createPostDataString(Param<?>... params) {
         return createDataString(System.lineSeparator(), params);
