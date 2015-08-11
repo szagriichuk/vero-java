@@ -9,9 +9,11 @@ import static com.vero.java.api.VeroHttpApiUrls.*;
 import static com.vero.java.http.HttpExecutor.execute;
 
 /**
+ * Default implementation of the {@link UsersApi}.
+ *
  * @author szagriichuk.
  */
-public class DefaultUsersApi extends BaseHttpApi implements UsersApi {
+class DefaultUsersApi extends BaseHttpApi implements UsersApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(UsersApi.class);
 
