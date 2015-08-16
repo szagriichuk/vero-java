@@ -1,27 +1,25 @@
 package com.vero.java.api;
 
+import static com.vero.java.api.VeroHttpApiUrls.HEARTBEAT;
+
 /**
  * @author szagriichuk.
  */
-public class VeroApi extends Key {
+public class VeroApi extends BaseHttpApi {
 
     public VeroApi(String key) {
         super(key);
     }
 
-    public ActionsApi actions(){
+    public ActionsApi actions() {
         return new DefaultActionsApi(key);
     }
 
-    public AuthenticationApi authentications(){
-        return null;
-    }
-
-    public TagsApi tags(){
-        return null;
-    }
-
-    public UsersApi users(){
+    public UsersApi users() {
         return new DefaultUsersApi(key);
+    }
+
+    public void heartbeat() {
+        post(HEARTBEAT);
     }
 }
