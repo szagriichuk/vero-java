@@ -12,7 +12,6 @@ import static com.vero.java.api.VeroHttpApiUrls.EVENTS_TRACK;
  * @author szagriichuk.
  */
 class DefaultActionsApi extends BaseHttpApi implements ActionsApi {
-    private static final Logger LOG = LoggerFactory.getLogger(ActionsApi.class);
 
     public DefaultActionsApi(String key) {
         super(key);

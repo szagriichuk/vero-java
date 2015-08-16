@@ -34,4 +34,14 @@ class DefaultUsersApi extends BaseHttpApi implements UsersApi {
     public void editTags(Id id, Add add, Remove remove) {
         post(EDIT_TAGS, id, add, remove);
     }
+
+    @Override
+    public void unsubscribe(Id id) {
+        post(UNSUBSCRIBE, id);
+    }
+
+    @Override
+    public void resubscribe(Id id) {
+        post(RESUBSCRIBE, id);
+    }
 }

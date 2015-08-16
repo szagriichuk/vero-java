@@ -50,4 +50,8 @@ public interface UsersApi {
     void reidentify(Id id, NewId newId);
 
     void editTags(Id id, Add add, Remove remove);
+
+    void unsubscribe(Id id);
+
+    void resubscribe(Id id);
 }
