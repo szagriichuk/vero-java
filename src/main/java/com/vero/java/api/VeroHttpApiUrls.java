@@ -6,6 +6,8 @@ import com.vero.java.http.url.Url;
 import static com.vero.java.http.url.Uris.*;
 
 /**
+ * API urls of the <a href="http://www.getvero.com/api/http/">HTTP Vero API</a>.
+ *
  * @author szagriichuk.
  */
 interface VeroHttpApiUrls {

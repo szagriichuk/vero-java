@@ -1,6 +1,8 @@
 package com.vero.java.api;
 
 /**
+ * Base class of accessing keys.
+ *
  * @author szagriichuk.
  */
 abstract class Key {
