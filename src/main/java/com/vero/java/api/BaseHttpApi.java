@@ -2,6 +2,7 @@ package com.vero.java.api;
 
 import com.vero.java.api.params.Param;
 import com.vero.java.http.HttpMethod;
+import com.vero.java.http.callback.TextResponseCallBack;
 import com.vero.java.http.callback.VoidResponseCallback;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
@@ -15,6 +16,7 @@ import static com.vero.java.http.HttpExecutor.execute;
 
 /**
  * Provides common methods for
+ *
  * @author szagriichuk.
  */
 abstract class BaseHttpApi extends Key {
@@ -29,6 +31,9 @@ abstract class BaseHttpApi extends Key {
     }
 
     String createHttpRequestString(String delim, Param<?>... params) {
+        if(params == null || params.length == 0)
+            return "";
+
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < params.length - 1; i++) {
             builder.append(params[i]).append(delim);
@@ -57,11 +62,15 @@ abstract class BaseHttpApi extends Key {
     }
 
     void post(String url, Param<?>... params) {
-        execute(createPostRequest(createPostDataString(params), url), new VoidResponseCallback() {
+        post(url, new VoidResponseCallback() {
             @Override
             public void onError(Throwable throwable) {
                 LOG.error("Cannot execute POST method.", throwable);
             }
-        });
+        }, params);
+    }
+
+    void post(String url, TextResponseCallBack callBack, Param<?>... params) {
+        execute(createPostRequest(createPostDataString(params), url), callBack);
     }
 }
