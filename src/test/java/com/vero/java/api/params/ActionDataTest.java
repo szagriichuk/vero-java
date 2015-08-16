@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class ActionDataTest extends ComplexParamTest{
 
     @Override
-    Param<?> getParameter(VeroData<String> value) {
+    Param<?> getParameter(VeroData value) {
         return new ActionData(value);
     }
 }

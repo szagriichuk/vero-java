@@ -15,7 +15,7 @@ public class SerializerTest {
         veroData.add(new AuthToken("KEY"));
         veroData.add(new Id(12345));
         veroData.add(new Email("test@test.com"));
-        VeroData<String> test = new VeroData<>();
+        VeroData test = new VeroData();
         test.add(new FirstName("test1"));
         test.add(new LastName("test2"));
         veroData.add(new UserData(test));

@@ -48,4 +48,6 @@ public interface UsersApi {
      * </pre>
      */
     void reidentify(Id id, NewId newId);
+
+    void editTags(Id id, Add add, Remove remove);
 }

@@ -6,8 +6,8 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class Identity extends ComplexParam<String> {
-    public Identity(VeroData<String> param) {
+public class Identity extends ComplexParam {
+    public Identity(VeroData param) {
         super(param);
     }
 

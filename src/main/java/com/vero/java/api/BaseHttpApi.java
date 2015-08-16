@@ -2,6 +2,7 @@ package com.vero.java.api;
 
 import com.vero.java.api.params.Param;
 import com.vero.java.http.HttpMethod;
+import com.vero.java.http.callback.ErrorResponseCallback;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.nio.entity.NStringEntity;
@@ -10,11 +11,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 
+import static com.vero.java.http.HttpExecutor.execute;
+
 /**
  * @author szagriichuk.
  */
-abstract class BaseHttpApi extends Key{
-    private static final Logger LOG = LoggerFactory.getLogger(BaseHttpApi.class);
+abstract class BaseHttpApi extends Key {
+    private static final Logger LOG = LoggerFactory.getLogger("Http API");
 
     public BaseHttpApi(String key) {
         super(key);
@@ -50,5 +53,14 @@ abstract class BaseHttpApi extends Key{
             LOG.error("Cannot create http request entity from String data.", e);
         }
         return null;
+    }
+
+    void post(String url, Param<?>... params) {
+        execute(createPostRequest(createPostDataString(params), url), new ErrorResponseCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+                LOG.error("Cannot execute POST method.", throwable);
+            }
+        });
     }
 }

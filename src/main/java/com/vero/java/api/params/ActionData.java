@@ -5,8 +5,8 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class ActionData extends Data<String> {
-    public ActionData(VeroData<String> param) {
+public class ActionData extends Data {
+    public ActionData(VeroData param) {
         super(param);
     }
 }

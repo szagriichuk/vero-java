@@ -7,8 +7,8 @@ import java.util.HashMap;
  *
  * @author szagriichuk.
  */
-public class VeroData<T> extends HashMap<String, T> {
-    public void add(Param<T> param) {
+public class VeroData extends HashMap<String, Object> {
+    public <T> void add(Param<T> param) {
         put(param.paramName(), param.value);
     }
 }

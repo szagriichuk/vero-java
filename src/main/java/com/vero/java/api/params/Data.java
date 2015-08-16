@@ -5,8 +5,8 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class Data<T> extends ComplexParam<T> {
-    public Data(VeroData<T> param) {
+public class Data extends ComplexParam {
+    public Data(VeroData param) {
         super(param);
     }
 

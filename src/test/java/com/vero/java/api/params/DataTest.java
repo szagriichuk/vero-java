@@ -6,7 +6,7 @@ package com.vero.java.api.params;
 public class DataTest extends ComplexParamTest {
 
     @Override
-    Param<?> getParameter(VeroData<String> value) {
-        return new Data<>(value);
+    Param<?> getParameter(VeroData value) {
+        return new Data(value);
     }
 }
