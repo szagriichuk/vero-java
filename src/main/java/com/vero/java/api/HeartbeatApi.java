@@ -1,6 +1,9 @@
 package com.vero.java.api;
 
 /**
+ * This API is available to be pinged on an regular basis for mission critical operations.
+ * It provides you with a functionality of checking the status of the Vero API.
+ *
  * @author szagriichuk.
  */
 interface HeartbeatApi {

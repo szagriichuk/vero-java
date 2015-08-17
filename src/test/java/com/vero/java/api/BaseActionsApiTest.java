@@ -10,7 +10,7 @@ public class BaseActionsApiTest {
 
     @Test
     public void testTrack() throws Exception {
-        ActionsApi actionsApi = new BaseActionsApi("faeb1ce37aeac6f563f768c7360b7c0ef16f1563");
+        ActionsApi actionsApi = new BaseActionsApi("TOKEN");
         actionsApi.track(new Identity(new VeroData() {{
             add(new Id(1234));
             add(new Email("john@smith.com"));

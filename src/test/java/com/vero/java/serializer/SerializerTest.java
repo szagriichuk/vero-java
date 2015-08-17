@@ -12,7 +12,7 @@ public class SerializerTest {
     @Test
     public void testSerialize() throws Exception {
         VeroData veroData = new VeroData();
-        veroData.add(new AuthToken("KEY"));
+        veroData.add(new AuthToken("TOKEN"));
         veroData.add(new Id(12345));
         veroData.add(new Email("test@test.com"));
         VeroData test = new VeroData();
