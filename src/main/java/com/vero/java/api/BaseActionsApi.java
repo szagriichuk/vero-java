@@ -3,17 +3,15 @@ package com.vero.java.api;
 import com.vero.java.api.params.ActionData;
 import com.vero.java.api.params.EventName;
 import com.vero.java.api.params.Identity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.vero.java.api.VeroHttpApiUrls.EVENTS_TRACK;
 
 /**
  * @author szagriichuk.
  */
-class DefaultActionsApi extends BaseHttpApi implements ActionsApi {
+class BaseActionsApi extends BaseHttpApi implements ActionsApi {
 
-    public DefaultActionsApi(String key) {
+    public BaseActionsApi(String key) {
         super(key);
     }
 

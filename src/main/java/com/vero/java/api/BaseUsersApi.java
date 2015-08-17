@@ -9,9 +9,9 @@ import static com.vero.java.api.VeroHttpApiUrls.*;
  *
  * @author szagriichuk.
  */
-class DefaultUsersApi extends BaseHttpApi implements UsersApi {
+class BaseUsersApi extends BaseHttpApi implements UsersApi {
 
-    public DefaultUsersApi(String key) {
+    public BaseUsersApi(String key) {
         super(key);
     }
 
