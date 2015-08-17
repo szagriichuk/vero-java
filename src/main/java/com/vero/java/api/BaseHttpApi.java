@@ -31,7 +31,7 @@ abstract class BaseHttpApi extends Key {
     }
 
     String createHttpRequestString(String delim, Param<?>... params) {
-        if(params == null || params.length == 0)
+        if (params == null || params.length == 0)
             return "";
 
         StringBuilder builder = new StringBuilder();
@@ -66,6 +66,7 @@ abstract class BaseHttpApi extends Key {
             @Override
             public void onError(Throwable throwable) {
                 LOG.error("Cannot execute POST method.", throwable);
+                throw new VeroApiException("Cannot execute POST method.", throwable);
             }
         }, params);
     }
