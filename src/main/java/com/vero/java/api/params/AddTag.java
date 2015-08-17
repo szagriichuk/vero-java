@@ -5,8 +5,8 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class Add extends StringParam {
-    public Add(String param) {
+public class AddTag extends Tag {
+    public AddTag(String param) {
         super(param);
     }
 

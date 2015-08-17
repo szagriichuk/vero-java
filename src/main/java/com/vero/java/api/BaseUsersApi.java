@@ -2,6 +2,10 @@ package com.vero.java.api;
 
 import com.vero.java.api.params.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static com.vero.java.api.VeroHttpApiUrls.*;
 
 /**
@@ -31,8 +35,15 @@ class BaseUsersApi extends BaseHttpApi implements UsersApi {
     }
 
     @Override
-    public void editTags(Id id, Add add, Remove remove) {
-        post(EDIT_TAGS, id, add, remove);
+    public void editTags(Id id, Tag... tags) {
+        post(EDIT_TAGS, toParams(id, tags));
+    }
+
+    private Param<?>[] toParams(Id id, Tag[] tags) {
+        List<Param<?>> paramList = new ArrayList<>();
+        Collections.addAll(paramList, id);
+        Collections.addAll(paramList, tags);
+        return paramList.toArray(new Param<?>[paramList.size()]);
     }
 
     @Override

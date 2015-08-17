@@ -1,17 +1,23 @@
 package com.vero.java.api;
 
 import com.vero.java.api.params.*;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author szagriichuk.
  */
 public class BaseUsersApiTest {
+    private UsersApi usersApi;
+
+    @Before
+    public void setUp() throws Exception {
+        usersApi = new BaseUsersApi("TOKEN");
+    }
 
     @Test
     public void testAdd() throws Exception {
-        UsersApi usersApi = new BaseUsersApi("TOKEN");
-        usersApi.add(new Id(1234), new Email("john@smith.com"), new UserData(new VeroData(){{
+        usersApi.add(new Id(1234), new Email("john@smith.com"), new UserData(new VeroData() {{
             add(new FirstName("John"));
             add(new LastName("Smith"));
         }}));
@@ -19,8 +25,7 @@ public class BaseUsersApiTest {
 
     @Test
     public void testUpdate() throws Exception {
-        UsersApi usersApi = new BaseUsersApi("TOKEN");
-        usersApi.update(new Id(1234),  new Changes(new VeroData(){{
+        usersApi.update(new Id(1234), new Changes(new VeroData() {{
             add(new FirstName("Mark"));
             add(new LastName("Twain"));
         }}));
@@ -28,7 +33,21 @@ public class BaseUsersApiTest {
 
     @Test
     public void testReidentify() throws Exception {
-        UsersApi usersApi = new BaseUsersApi("TOKEN");
         usersApi.reidentify(new Id(1234), new NewId(4321));
+    }
+
+    @Test
+    public void testEditTags() throws Exception {
+        usersApi.editTags(new Id(1234), new AddTag("warm-lead"), new RemoveTag("prospect"));
+    }
+
+    @Test
+    public void testUnsubscribes() throws Exception {
+        usersApi.unsubscribe(new Id(1234));
+    }
+
+    @Test
+    public void testResubscribes() throws Exception {
+        usersApi.resubscribe(new Id(1234));
     }
 }

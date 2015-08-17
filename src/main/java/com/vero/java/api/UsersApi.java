@@ -49,9 +49,28 @@ public interface UsersApi {
      */
     void reidentify(Id id, NewId newId);
 
-    void editTags(Id id, Add add, Remove remove);
+    /**
+     * The {@code editTags} allows you to {@code add} or/and {@code remove} tags.
+     * <pre>
+     *     {@code
+     *     usersApi.editTags(new Id(1234), new AddTag("warm-lead"), new RemoveTag("prospect"));
+     *     }
+     * </pre>
+     */
+    void editTags(Id id, Tag... tags);
 
+    /**
+     * The {@code unsubscribe} gives you a simple way to unsubscribe a user.
+     * <p/>
+     * To unsubscribe a user, simply pass up the identifier (ID) of the user
+     * you want to unsubscribe.
+     */
     void unsubscribe(Id id);
 
+    /**
+     * The {@code resubscribe} endpoint gives you a simple way to resubscribe a user.
+     * To resubscribe a user, simply pass up the identifier (ID) of the user
+     * you want to resubscribe.
+     */
     void resubscribe(Id id);
 }

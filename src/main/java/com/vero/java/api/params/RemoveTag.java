@@ -5,8 +5,8 @@ package com.vero.java.api.params;
  *
  * @author szagriichuk.
  */
-public class Remove extends StringParam {
-    public Remove(String param) {
+public class RemoveTag extends Tag {
+    public RemoveTag(String param) {
         super(param);
     }
 
