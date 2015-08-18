@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+jar.version = '1.0'
+
 repositories {
     jcenter()
 }
