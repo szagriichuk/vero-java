@@ -17,17 +17,13 @@ public class BaseUsersApiTest {
 
     @Test
     public void testAdd() throws Exception {
-        usersApi.add(new Id(1234), new Email("john@smith.com"), new UserData(new VeroData() {{
-            add(new FirstName("John"));
-            add(new LastName("Smith"));
-        }}));
-        new VeroData() {{
-            add(new FirstName("John"));
-            add(new LastName("Smith"));
-            add(new StringParamWithName("param1", "value1"));
-            add(new StringParamWithName("param2", "value2"));
-            add(new StringParamWithName("param3", "value3"));
-        }};
+        usersApi.add(new Id(123), new Email("test@gmail.com"), new UserData(new VeroData() {
+            {
+                add(new StringParamWithName("test1", "123"));
+                add(new StringParamWithName("test1", "123"));
+                add(new StringParamWithName("test2", "321"));
+            }
+        }));
     }
 
 

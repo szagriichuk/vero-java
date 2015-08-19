@@ -17,6 +17,6 @@ class BaseActionsApi extends BaseHttpApi implements ActionsApi {
 
     @Override
     public void track(Identity identity, EventName name, ActionData data) {
-        post(EVENTS_TRACK, identity, name, data);
+        post(EVENTS_TRACK, createVeroData(identity, name, data));
     }
 }

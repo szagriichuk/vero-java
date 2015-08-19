@@ -1,9 +1,11 @@
 package com.vero.java.api;
 
-import org.junit.Assert;
+import com.vero.java.api.params.*;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.fail;
 
 /**
  * @author szagriichuk.
@@ -16,15 +18,27 @@ public class VeroApiTest {
     }
 
     @Test
-    public void testUsers() throws Exception {
-        //TODO
+    public void testUsersAdd() throws Exception {
+        VeroApi veroApi = new VeroApi("KEY");
+        try {
+            veroApi.users().add(new Id(123), new Email("test@gmail.com"), new UserData(new VeroData() {
+                {
+                    add(new StringParamWithName("test1", "123"));
+                    add(new StringParamWithName("test1", "123"));
+                    add(new StringParamWithName("test2", "321"));
+                }
+            }));
+            TimeUnit.SECONDS.sleep(3);
+        } catch (Exception e) {
+            fail("The add user is fail");
+        }
     }
 
     @Test
     public void testHeartbeat() throws Exception {
-        VeroApi veroApi = new VeroApi("TOKEN");
+        VeroApi veroApi = new VeroApi("KEY");
         try {
-            veroApi.heartbeat();
+            veroApi.heartbeat().heartbeat();
         } catch (Exception e) {
             fail("The hearbeat is fail");
         }

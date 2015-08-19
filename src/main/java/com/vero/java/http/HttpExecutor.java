@@ -2,6 +2,7 @@ package com.vero.java.http;
 
 import com.vero.java.http.callback.TextResponseCallBack;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
@@ -23,11 +24,17 @@ public final class HttpExecutor {
         httpAsyncClients.execute(method, new FutureCallback<HttpResponse>() {
             @Override
             public void completed(HttpResponse result) {
+                checkIfStatusIsSuccess(result);
                 try {
                     callback.onComplete(EntityUtils.toString(result.getEntity()));
                 } catch (IOException e) {
                     failed(e);
                 }
+            }
+
+            private void checkIfStatusIsSuccess(HttpResponse result) {
+                if (result.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
+                    failed(new HttpException(result.getStatusLine().getReasonPhrase()));
             }
 
             @Override

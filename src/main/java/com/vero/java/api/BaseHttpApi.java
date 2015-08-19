@@ -1,11 +1,15 @@
 package com.vero.java.api;
 
+import com.vero.java.api.params.AuthToken;
 import com.vero.java.api.params.Param;
+import com.vero.java.api.params.VeroData;
 import com.vero.java.http.HttpMethod;
 import com.vero.java.http.callback.TextResponseCallBack;
 import com.vero.java.http.callback.VoidResponseCallback;
+import com.vero.java.serializer.Serializer;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.nio.entity.NStringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,15 +30,17 @@ abstract class BaseHttpApi extends Key {
         super(key);
     }
 
-    String createPostDataString(Param<?>... params) {
-        return createHttpRequestString(System.lineSeparator(), params);
+    String createHttpEntityData(VeroData params) {
+        params.add(new AuthToken(key));
+        return Serializer.serialize(params);
     }
 
-    String createHttpRequestString(String delim, Param<?>... params) {
+    String createHttpRequestString(String delim, AuthToken authToken, Param<?>... params) {
         if (params == null || params.length == 0)
             return "";
 
         StringBuilder builder = new StringBuilder();
+        builder.append(authToken).append(delim);
         for (int i = 0; i < params.length - 1; i++) {
             builder.append(params[i]).append(delim);
         }
@@ -52,6 +58,19 @@ abstract class BaseHttpApi extends Key {
         return post;
     }
 
+    HttpEntityEnclosingRequestBase createPutRequest(String postData, String url) {
+        HttpEntityEnclosingRequestBase post = (HttpEntityEnclosingRequestBase) HttpMethod.PUT.create(url);
+        HttpEntity entity = createHttpEntity(postData);
+        if (entity != null) {
+            post.setEntity(entity);
+        }
+        return post;
+    }
+
+    HttpRequestBase createGetRequest(String url) {
+        return HttpMethod.GET.create(url);
+    }
+
     private HttpEntity createHttpEntity(String data) {
         try {
             return new NStringEntity(data);
@@ -61,7 +80,7 @@ abstract class BaseHttpApi extends Key {
         return null;
     }
 
-    void post(String url, Param<?>... params) {
+    void post(String url, VeroData params) {
         post(url, new VoidResponseCallback() {
             @Override
             public void onError(Throwable throwable) {
@@ -71,7 +90,47 @@ abstract class BaseHttpApi extends Key {
         }, params);
     }
 
-    void post(String url, TextResponseCallBack callBack, Param<?>... params) {
-        execute(createPostRequest(createPostDataString(params), url), callBack);
+    void post(String url, TextResponseCallBack callBack, VeroData params) {
+        execute(createPostRequest(createHttpEntityData(params), url), callBack);
+    }
+
+    void put(String url, TextResponseCallBack callBack, VeroData params) {
+        execute(createPutRequest(createHttpEntityData(params), url), callBack);
+    }
+
+    void put(String url, VeroData params) {
+        put(url, new VoidResponseCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+                LOG.error("Cannot execute POST method.", throwable);
+                throw new VeroApiException("Cannot execute POST method.", throwable);
+            }
+        }, params);
+    }
+
+    void get(String url, Param<?>... params) {
+        get(url, new VoidResponseCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+                LOG.error("Cannot execute GET method.", throwable);
+                throw new VeroApiException("Cannot execute GET method.", throwable);
+            }
+        }, params);
+    }
+
+    void get(String url, TextResponseCallBack callBack, Param<?>... params) {
+        execute(createGetRequest(createGetUrl(url + "?", params)), callBack);
+    }
+
+    String createGetUrl(String url, Param<?>... params) {
+        return url + createHttpRequestString("&", new AuthToken(key), params);
+    }
+
+    VeroData createVeroData(Param<?>... params) {
+        VeroData veroData = new VeroData();
+        for (Param<?> param : params) {
+            veroData.add(param);
+        }
+        return veroData;
     }
 }

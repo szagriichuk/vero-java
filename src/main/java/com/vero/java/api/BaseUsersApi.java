@@ -21,22 +21,22 @@ class BaseUsersApi extends BaseHttpApi implements UsersApi {
 
     @Override
     public void add(Id id, Email email, UserData data) {
-        post(USERS_TRACK, id, email, data);
+        post(USERS_TRACK, createVeroData(id, email, data));
     }
 
     @Override
     public void update(Id id, Changes data) {
-        post(UPDATE, id, data);
+        put(UPDATE, createVeroData(id, data));
     }
 
     @Override
     public void reidentify(Id id, NewId newId) {
-        post(REIDENTIFY, id, newId);
+        put(REIDENTIFY, createVeroData(id, newId));
     }
 
     @Override
     public void editTags(Id id, Tag... tags) {
-        post(EDIT_TAGS, toParams(id, tags));
+        put(EDIT_TAGS, createVeroData(toParams(id, tags)));
     }
 
     private Param<?>[] toParams(Id id, Tag[] tags) {
@@ -48,16 +48,16 @@ class BaseUsersApi extends BaseHttpApi implements UsersApi {
 
     @Override
     public void unsubscribe(Id id) {
-        post(UNSUBSCRIBE, id);
+        post(UNSUBSCRIBE, createVeroData(id));
     }
 
     @Override
     public void resubscribe(Id id) {
-        post(RESUBSCRIBE, id);
+        post(RESUBSCRIBE, createVeroData(id));
     }
 
     @Override
     public void delete(Id id) {
-        post(DELETE, id);
+        post(DELETE, createVeroData(id));
     }
 }
