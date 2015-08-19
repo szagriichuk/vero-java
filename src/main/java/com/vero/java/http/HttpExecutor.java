@@ -10,8 +10,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
-import static com.vero.java.serializer.Serializer.deserialize;
-
 /**
  * Http method executor.
  *
@@ -26,7 +24,7 @@ public final class HttpExecutor {
             @Override
             public void completed(HttpResponse result) {
                 try {
-                    callback.onComplete(deserialize(EntityUtils.toString(result.getEntity()), String.class));
+                    callback.onComplete(EntityUtils.toString(result.getEntity()));
                 } catch (IOException e) {
                     failed(e);
                 }
