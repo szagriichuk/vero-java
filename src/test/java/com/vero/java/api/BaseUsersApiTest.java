@@ -21,7 +21,15 @@ public class BaseUsersApiTest {
             add(new FirstName("John"));
             add(new LastName("Smith"));
         }}));
+        new VeroData() {{
+            add(new FirstName("John"));
+            add(new LastName("Smith"));
+            add(new StringParamWithName("param1", "value1"));
+            add(new StringParamWithName("param2", "value2"));
+            add(new StringParamWithName("param3", "value3"));
+        }};
     }
+
 
     @Test
     public void testUpdate() throws Exception {

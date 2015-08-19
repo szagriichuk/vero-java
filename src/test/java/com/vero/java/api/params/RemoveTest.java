@@ -7,6 +7,6 @@ public class RemoveTest extends StringBaseParameterTest {
 
     @Override
     Param<?> getParameter(String name) {
-        return new Remove(name);
+        return new RemoveTag(name);
     }
 }

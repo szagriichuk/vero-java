@@ -8,7 +8,7 @@ import java.util.List;
  */
 public enum Uris {
     BASE("https://api.getvero.com/api"), EDIT("edit"), EVENTS("events"), HEARBEAT("heartbeat"), REIDENTIFY("reidentify"),
-    RESUBSCRIBE("resubscribe"), TAGS("tags"), TRACK("track"), UNSUBSCRIBE("unsubscribe"), USERS("users"), VERSION("v2");
+    RESUBSCRIBE("resubscribe"), TAGS("tags"), TRACK("track"), UNSUBSCRIBE("unsubscribe"), USERS("users"), VERSION("v2"), DELETE("delete");
 
     private String value;
 

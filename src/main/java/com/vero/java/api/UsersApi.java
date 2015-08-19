@@ -73,4 +73,9 @@ public interface UsersApi {
      * you want to resubscribe.
      */
     void resubscribe(Id id);
+
+    /**
+     * The {@code delete} endpoint gives you a simple way to delete a user from Vero DB.
+     */
+    void delete(Id id);
 }

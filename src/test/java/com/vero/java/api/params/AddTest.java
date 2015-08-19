@@ -7,6 +7,6 @@ public class AddTest extends StringBaseParameterTest {
 
     @Override
     Param<?> getParameter(String name) {
-        return new Add(name);
+        return new AddTag(name);
     }
 }

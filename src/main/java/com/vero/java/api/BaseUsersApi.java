@@ -55,4 +55,9 @@ class BaseUsersApi extends BaseHttpApi implements UsersApi {
     public void resubscribe(Id id) {
         post(RESUBSCRIBE, id);
     }
+
+    @Override
+    public void delete(Id id) {
+        post(DELETE, id);
+    }
 }
