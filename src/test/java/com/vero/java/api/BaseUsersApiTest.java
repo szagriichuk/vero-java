@@ -17,22 +17,20 @@ public class BaseUsersApiTest {
 
     @Test
     public void testAdd() throws Exception {
-        usersApi.add(new Id(123), new Email("test@gmail.com"), new UserData(new VeroData() {
-            {
-                add(new StringParamWithName("test1", "123"));
-                add(new StringParamWithName("test1", "123"));
-                add(new StringParamWithName("test2", "321"));
-            }
-        }));
+        usersApi.add(new Id(123), new Email("test@gmail.com"), new UserData(VeroData.
+                of().
+                of(new StringParamWithName("test1", "123")).
+                of(new StringParamWithName("test1", "123")).build()
+        ));
     }
 
 
     @Test
     public void testUpdate() throws Exception {
-        usersApi.update(new Id(1234), new Changes(new VeroData() {{
-            add(new FirstName("Mark"));
-            add(new LastName("Twain"));
-        }}));
+        usersApi.update(new Id(1234), new Changes(VeroData.of().of(
+                new FirstName("Mark")).of(
+                new LastName("Twain")).build()
+        ));
     }
 
     @Test

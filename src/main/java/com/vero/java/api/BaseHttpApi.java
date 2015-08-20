@@ -58,6 +58,10 @@ abstract class BaseHttpApi extends Key {
         return post;
     }
 
+    HttpRequestBase createDeleteRequest(String url) {
+        return HttpMethod.DELETE.create(url);
+    }
+
     HttpEntityEnclosingRequestBase createPutRequest(String postData, String url) {
         HttpEntityEnclosingRequestBase post = (HttpEntityEnclosingRequestBase) HttpMethod.PUT.create(url);
         HttpEntity entity = createHttpEntity(postData);
@@ -119,18 +123,31 @@ abstract class BaseHttpApi extends Key {
     }
 
     void get(String url, TextResponseCallBack callBack, Param<?>... params) {
-        execute(createGetRequest(createGetUrl(url + "?", params)), callBack);
+        execute(createGetRequest(createUrlWithParams(url + "?", params)), callBack);
     }
 
-    String createGetUrl(String url, Param<?>... params) {
-        return url + createHttpRequestString("&", new AuthToken(key), params);
+    void delete(String url, Param<?>... params) {
+        delete(url, new VoidResponseCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+                LOG.error("Cannot execute POST method.", throwable);
+                throw new VeroApiException("Cannot execute POST method.", throwable);
+            }
+        }, params);
     }
+
+    void delete(String url, TextResponseCallBack callBack, Param<?>... params) {
+        execute(createDeleteRequest(createUrlWithParams(url + "?", params)), callBack);
+    }
+
 
     VeroData createVeroData(Param<?>... params) {
-        VeroData veroData = new VeroData();
-        for (Param<?> param : params) {
-            veroData.add(param);
-        }
+        VeroData veroData = VeroData.of().build();
+        veroData.addAll(params);
         return veroData;
+    }
+
+    String createUrlWithParams(String url, Param<?>... params) {
+        return url + createHttpRequestString("&", new AuthToken(key), params);
     }
 }

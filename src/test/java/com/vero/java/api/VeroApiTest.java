@@ -21,13 +21,34 @@ public class VeroApiTest {
     public void testUsersAdd() throws Exception {
         VeroApi veroApi = new VeroApi("KEY");
         try {
-            veroApi.users().add(new Id(123), new Email("test@gmail.com"), new UserData(new VeroData() {
-                {
-                    add(new StringParamWithName("test1", "123"));
-                    add(new StringParamWithName("test1", "123"));
-                    add(new StringParamWithName("test2", "321"));
-                }
-            }));
+            veroApi.users().add(new Id(12345), new Email("john@smith.com"), new UserData(
+                    VeroData.of().
+                            of(new FirstName("John")).
+                            of(new LastName("Smith")).
+                            build()
+            ));
+            TimeUnit.SECONDS.sleep(3);
+        } catch (Exception e) {
+            fail("The add user is fail");
+        }
+    }
+
+    @Test
+    public void testUsersDelete() throws Exception {
+        VeroApi veroApi = new VeroApi("KEY");
+        try {
+            veroApi.users().delete(new Id(12345));
+            TimeUnit.SECONDS.sleep(3);
+        } catch (Exception e) {
+            fail("The add user is fail");
+        }
+    }
+
+    @Test
+    public void testUsersUnsubscribe() throws Exception {
+        VeroApi veroApi = new VeroApi("KEY");
+        try {
+            veroApi.users().unsubscribe(new Id(12345));
             TimeUnit.SECONDS.sleep(3);
         } catch (Exception e) {
             fail("The add user is fail");

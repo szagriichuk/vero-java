@@ -11,11 +11,11 @@ public class SerializerTest {
 
     @Test
     public void testSerialize() throws Exception {
-        VeroData veroData = new VeroData();
+        VeroData veroData = VeroData.of().build();
         veroData.add(new AuthToken("TOKEN"));
         veroData.add(new Id(12345));
         veroData.add(new Email("test@test.com"));
-        VeroData test = new VeroData();
+        VeroData test = VeroData.of().build();
         test.add(new FirstName("test1"));
         test.add(new LastName("test2"));
         veroData.add(new UserData(test));

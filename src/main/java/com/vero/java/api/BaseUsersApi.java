@@ -58,6 +58,6 @@ class BaseUsersApi extends BaseHttpApi implements UsersApi {
 
     @Override
     public void delete(Id id) {
-        post(DELETE, createVeroData(id));
+        delete(DELETE, id);
     }
 }
