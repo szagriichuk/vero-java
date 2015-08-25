@@ -1,5 +1,6 @@
 package com.vero.java.serializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -13,6 +14,14 @@ public class Serializer {
     public static <T> T deserialize(String data, Class<T> clazz) {
         try {
             return mapper.readValue(data, clazz);
+        } catch (IOException e) {
+            throw new SerializerException(e);
+        }
+    }
+
+    public static JsonNode deserialize(String data) {
+        try {
+            return mapper.readTree(data);
         } catch (IOException e) {
             throw new SerializerException(e);
         }

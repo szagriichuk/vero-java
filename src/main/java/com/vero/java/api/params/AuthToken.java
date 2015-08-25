@@ -11,7 +11,7 @@ public class AuthToken extends StringParam {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "auth_token";
     }
 }

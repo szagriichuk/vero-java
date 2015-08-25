@@ -11,7 +11,7 @@ public class NewId extends Param<Integer> {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "new_id";
     }
 }

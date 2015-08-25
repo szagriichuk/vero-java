@@ -18,23 +18,30 @@ public class VeroApi extends BaseHttpApi {
     }
 
     /**
-     * Returns an new instance of the default implementation of {@link ActionsApi};
+     * Returns a new instance of the default implementation of {@link ActionsApi};
      */
     public ActionsApi actions() {
         return new BaseActionsApi(key);
     }
 
     /**
-     * Returns an new instance of the default implementation of {@link UsersApi};
+     * Returns a new instance of the default implementation of {@link UsersApi};
      */
     public UsersApi users() {
         return new BaseUsersApi(key);
     }
 
     /**
-     * Returns an new instance of the default implementation of {@link HeartbeatApi};
+     * Returns a new instance of the default implementation of {@link HeartbeatApi};
      */
     public HeartbeatApi heartbeat() {
         return new BaseHeartbeatApi(key);
+    }
+
+    /**
+     * Returns a new instance of the default implementation of {@link CustomerApi};
+     */
+    public CustomerApi customers() {
+        return new BaseCustomerApi(key);
     }
 }

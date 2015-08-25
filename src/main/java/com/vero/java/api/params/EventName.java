@@ -11,7 +11,7 @@ public class EventName extends StringParam{
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "event_name";
     }
 }

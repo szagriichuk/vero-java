@@ -3,10 +3,12 @@ package com.vero.java.api;
 import com.vero.java.api.params.AuthToken;
 import com.vero.java.api.params.Param;
 import com.vero.java.api.params.VeroData;
+import com.vero.java.http.Headers;
 import com.vero.java.http.HttpMethod;
 import com.vero.java.http.callback.TextResponseCallBack;
 import com.vero.java.http.callback.VoidResponseCallback;
 import com.vero.java.serializer.Serializer;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -15,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import static com.vero.java.http.HttpExecutor.execute;
 
@@ -24,7 +27,7 @@ import static com.vero.java.http.HttpExecutor.execute;
  * @author szagriichuk.
  */
 abstract class BaseHttpApi extends Key {
-    private static final Logger LOG = LoggerFactory.getLogger("Http API");
+    static final Logger LOG = LoggerFactory.getLogger("Http API");
 
     public BaseHttpApi(String key) {
         super(key);
@@ -35,7 +38,7 @@ abstract class BaseHttpApi extends Key {
         return Serializer.serialize(params);
     }
 
-    String createHttpRequestString(String delim, AuthToken authToken, Param<?>... params) {
+    String createRequestString(String delim, AuthToken authToken, Param<?>... params) {
         if (params == null || params.length == 0)
             return "";
 
@@ -71,8 +74,16 @@ abstract class BaseHttpApi extends Key {
         return post;
     }
 
-    HttpRequestBase createGetRequest(String url) {
-        return HttpMethod.GET.create(url);
+    HttpRequestBase createGetRequestWithHeader(String url, List<Header> headers) {
+        HttpRequestBase requestBase = HttpMethod.GET.create(url);
+        addHeaders(headers, requestBase);
+        return requestBase;
+    }
+
+    private void addHeaders(List<Header> headers, HttpRequestBase requestBase) {
+        for (Header header : headers) {
+            requestBase.addHeader(header);
+        }
     }
 
     private HttpEntity createHttpEntity(String data) {
@@ -113,7 +124,7 @@ abstract class BaseHttpApi extends Key {
     }
 
     void get(String url, Param<?>... params) {
-        get(url, new VoidResponseCallback() {
+        get(url, Headers.create(), new VoidResponseCallback() {
             @Override
             public void onError(Throwable throwable) {
                 LOG.error("Cannot execute GET method.", throwable);
@@ -122,8 +133,22 @@ abstract class BaseHttpApi extends Key {
         }, params);
     }
 
-    void get(String url, TextResponseCallBack callBack, Param<?>... params) {
-        execute(createGetRequest(createUrlWithParams(url + "?", params)), callBack);
+    void get(String url, List<Header> headers, Param<?>... params) {
+        get(url, headers, new VoidResponseCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+                LOG.error("Cannot execute GET method.", throwable);
+                throw new VeroApiException("Cannot execute GET method.", throwable);
+            }
+        }, params);
+    }
+
+    void get(String url, List<Header> headers, TextResponseCallBack callBack, Param<?>... params) {
+        execute(createGetRequestWithHeader(createUrlWithParams(url + "?", createRequestString("&", new AuthToken(key), params)), headers), callBack);
+    }
+
+    void get(String url, List<Header> headers, TextResponseCallBack callBack, String urlValues) {
+        execute(createGetRequestWithHeader(createUrlWithParams(url + "/", urlValues), headers), callBack);
     }
 
     void delete(String url, Param<?>... params) {
@@ -137,7 +162,7 @@ abstract class BaseHttpApi extends Key {
     }
 
     void delete(String url, TextResponseCallBack callBack, Param<?>... params) {
-        execute(createDeleteRequest(createUrlWithParams(url + "?", params)), callBack);
+        execute(createDeleteRequest(createUrlWithParams(url + "?", createRequestString("&", new AuthToken(key), params))), callBack);
     }
 
 
@@ -147,7 +172,7 @@ abstract class BaseHttpApi extends Key {
         return veroData;
     }
 
-    String createUrlWithParams(String url, Param<?>... params) {
-        return url + createHttpRequestString("&", new AuthToken(key), params);
+    String createUrlWithParams(String url, String paramsValues) {
+        return url + paramsValues;
     }
 }

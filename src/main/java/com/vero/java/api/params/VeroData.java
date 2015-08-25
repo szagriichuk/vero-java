@@ -18,7 +18,7 @@ public class VeroData extends HashMap<String, Object> {
     }
 
     public <T> void add(Param<T> param) {
-        put(param.paramName(), param.value);
+        put(param.name(), param.value);
     }
 
     public final void addAll(Param<?>... params) {

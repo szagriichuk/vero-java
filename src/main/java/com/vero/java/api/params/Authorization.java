@@ -3,13 +3,13 @@ package com.vero.java.api.params;
 /**
  * @author szagriichuk.
  */
-public class LastName extends StringParam {
-    public LastName(String param) {
+public class Authorization extends StringParam {
+    public Authorization(String param) {
         super(param);
     }
 
     @Override
     public String name() {
-        return "lastname";
+        return "Authorization";
     }
 }

@@ -14,8 +14,11 @@ public abstract class Param<T> {
 
     @Override
     public String toString() {
-        return paramName() + "=" + value;
+        return name() + "=" + value;
     }
 
-    protected abstract String paramName();
+    public abstract String name();
+    public T value(){
+        return value;
+    }
 }

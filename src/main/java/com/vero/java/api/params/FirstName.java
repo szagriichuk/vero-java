@@ -10,7 +10,7 @@ public class FirstName extends StringParam {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "firstname";
     }
 }

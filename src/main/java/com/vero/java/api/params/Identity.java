@@ -12,7 +12,7 @@ public class Identity extends ComplexParam {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "identity";
     }
 }

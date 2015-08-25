@@ -11,7 +11,7 @@ public class Data extends ComplexParam {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "data";
     }
 }

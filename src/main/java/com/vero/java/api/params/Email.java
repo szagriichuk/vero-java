@@ -11,7 +11,7 @@ public class Email extends StringParam {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "email";
     }
 }

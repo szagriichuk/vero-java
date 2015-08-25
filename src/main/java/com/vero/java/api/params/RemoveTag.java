@@ -11,7 +11,7 @@ public class RemoveTag extends Tag {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "remove";
     }
 }

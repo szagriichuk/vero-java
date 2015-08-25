@@ -3,8 +3,7 @@ package com.vero.java.http.url;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.vero.java.http.url.Uris.BASE;
-import static com.vero.java.http.url.Uris.VERSION;
+import static com.vero.java.http.url.Uris.*;
 
 /**
  * @author szagriichuk.
@@ -20,7 +19,11 @@ public final class Url {
     }
 
     public static Url v2() {
-        return Url.start().of(BASE).of(VERSION);
+        return Url.start().of(API).of(V2);
+    }
+
+    public static Url openV1() {
+        return Url.start().of(OPEN).of(V1);
     }
 
     public Url of(Uris uri) {

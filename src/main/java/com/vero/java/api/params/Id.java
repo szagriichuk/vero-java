@@ -11,7 +11,7 @@ public class Id extends Param<Integer> {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "id";
     }
 }

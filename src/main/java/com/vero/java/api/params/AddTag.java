@@ -11,7 +11,7 @@ public class AddTag extends Tag {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "add";
     }
 }

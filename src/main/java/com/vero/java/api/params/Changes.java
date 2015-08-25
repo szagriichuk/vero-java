@@ -12,7 +12,7 @@ public class Changes extends ComplexParam {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return "changes";
     }
 }

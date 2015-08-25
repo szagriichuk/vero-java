@@ -20,7 +20,7 @@ public abstract class BaseParamTest<T> {
     }
 
     private String getExpected(Param param) {
-        return param.paramName() + "=" + param.value;
+        return param.name() + "=" + param.value;
     }
 
     abstract Param<?> getParameter(T value);

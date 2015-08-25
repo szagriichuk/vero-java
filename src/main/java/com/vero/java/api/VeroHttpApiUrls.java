@@ -19,6 +19,7 @@ interface VeroHttpApiUrls {
     String UNSUBSCRIBE = Url.v2().of(USERS).of(Uris.UNSUBSCRIBE).build();
     String RESUBSCRIBE = Url.v2().of(USERS).of(Uris.RESUBSCRIBE).build();
     String DELETE = Url.v2().of(USERS).of(Uris.DELETE).build();
+    String GET_USER = Url.openV1().of(CUSTOMETS).build();
     // Events
     String EVENTS_TRACK = Url.v2().of(EVENTS).of(Uris.TRACK).build();
     // Common

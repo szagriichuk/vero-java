@@ -12,7 +12,7 @@ public class StringParamWithName extends StringParam {
     }
 
     @Override
-    protected String paramName() {
+    public String name() {
         return name;
     }
 }
