@@ -21,9 +21,13 @@ public class VeroData extends HashMap<String, Object> {
         return new VeroDataBuilder();
     }
 
+    public static VeroData empty() {
+        return new VeroData();
+    }
+
     public final <T> VeroData add(Param<T> param) {
         VeroData vero = new VeroData(this);
-        vero.add(param);
+        vero.put(param.name(), param.value);
         return vero;
     }
 
