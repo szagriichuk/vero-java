@@ -48,9 +48,7 @@ public class VeroData extends HashMap<String, Object> {
         }
 
         public VeroData build() {
-            VeroData veroData = new VeroData();
-            veroData.addAll(params.toArray(new Param[params.size()]));
-            return veroData;
+            return new VeroData().addAll(params.toArray(new Param[params.size()]));
         }
     }
 }

@@ -21,7 +21,7 @@ public class VeroApiTest {
 
     @Test
     public void testUsersAdd() throws Exception {
-        VeroApi veroApi = new VeroApi("KEY");
+        VeroApi veroApi = new VeroApi("ZmFlYjFjZTM3YWVhYzZmNTYzZjc2OGM3MzYwYjdjMGVmMTZmMTU2Mzo4NTcyOTU3NjkwNjRjNTAxMTU4ZjkxMTdkMTRjOWQ3NDBkZDFkMTNk");
         try {
             veroApi.users().add(new Id(12345678), new Email("john@smith.com"), new UserData(
                     VeroData.of().

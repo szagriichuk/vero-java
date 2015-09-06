@@ -34,8 +34,7 @@ abstract class BaseHttpApi extends Key {
     }
 
     String createHttpEntityData(VeroData params) {
-        params.add(new AuthToken(key));
-        return Serializer.serialize(params);
+        return Serializer.serialize(params.add(new AuthToken(key)));
     }
 
     String createRequestString(String delim, AuthToken authToken, Param<?>... params) {
@@ -165,11 +164,9 @@ abstract class BaseHttpApi extends Key {
         execute(createDeleteRequest(createUrlWithParams(url + "?", createRequestString("&", new AuthToken(key), params))), callBack);
     }
 
-
     VeroData createVeroData(Param<?>... params) {
         VeroData veroData = VeroData.of().build();
-        veroData.addAll(params);
-        return veroData;
+        return veroData.addAll(params);
     }
 
     String createUrlWithParams(String url, String paramsValues) {

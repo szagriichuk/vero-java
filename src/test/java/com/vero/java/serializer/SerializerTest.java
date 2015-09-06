@@ -12,13 +12,13 @@ public class SerializerTest {
     @Test
     public void testSerialize() throws Exception {
         VeroData veroData = VeroData.of().build();
-        veroData.add(new AuthToken("TOKEN"));
-        veroData.add(new Id(12345));
-        veroData.add(new Email("test@test.com"));
+        veroData = veroData.add(new AuthToken("TOKEN"));
+        veroData = veroData.add(new Id(12345));
+        veroData = veroData.add(new Email("test@test.com"));
         VeroData test = VeroData.of().build();
-        test.add(new FirstName("test1"));
-        test.add(new LastName("test2"));
-        veroData.add(new UserData(test));
+        test = test.add(new FirstName("test1"));
+        test = test.add(new LastName("test2"));
+        veroData = veroData.add(new UserData(test));
         Assert.assertNotNull(Serializer.serialize(veroData));
     }
 }
