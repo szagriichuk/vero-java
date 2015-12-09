@@ -18,7 +18,6 @@ public class BaseUsersApiTest {
     @Test
     public void testAdd() throws Exception {
         usersApi.add(new Id(123), new Email("test@gmail.com"), new UserData(VeroData.
-                of().
                 of(new StringParamWithName("test1", "123")).
                 of(new StringParamWithName("test1", "123")).build()
         ));
@@ -27,7 +26,7 @@ public class BaseUsersApiTest {
 
     @Test
     public void testUpdate() throws Exception {
-        usersApi.update(new Id(1234), new Changes(VeroData.of().of(
+        usersApi.update(new Id(1234), new Changes(VeroData.of(
                 new FirstName("Mark")).of(
                 new LastName("Twain")).build()
         ));

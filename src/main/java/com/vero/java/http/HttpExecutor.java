@@ -17,11 +17,11 @@ import java.io.IOException;
  * @author szagriichuk.
  */
 public final class HttpExecutor {
-    private static CloseableHttpAsyncClient httpAsyncClients = HttpAsyncClients.createDefault();
+    private static CloseableHttpAsyncClient httpAsyncClient = HttpAsyncClients.createDefault();
 
     public static void execute(HttpRequestBase method, final TextResponseCallBack callback) {
         startAsyncClient();
-        httpAsyncClients.execute(method, new FutureCallback<HttpResponse>() {
+        httpAsyncClient.execute(method, new FutureCallback<HttpResponse>() {
             @Override
             public void completed(HttpResponse result) {
                 checkIfStatusIsSuccess(result);
@@ -44,14 +44,14 @@ public final class HttpExecutor {
 
             @Override
             public void cancelled() {
-                throw new HttpException("The operation was canceled.");
+                failed(new HttpException("The operation was canceled."));
             }
         });
     }
 
     private static void startAsyncClient() {
-        if (!httpAsyncClients.isRunning()) {
-            httpAsyncClients.start();
+        if (!httpAsyncClient.isRunning()) {
+            httpAsyncClient.start();
         }
     }
 }

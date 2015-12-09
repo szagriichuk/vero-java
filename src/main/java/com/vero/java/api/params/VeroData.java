@@ -17,8 +17,8 @@ public class VeroData extends HashMap<String, Object> {
         super(veroData);
     }
 
-    public static VeroDataBuilder of() {
-        return new VeroDataBuilder();
+    public static VeroDataBuilder of(Param<?> param) {
+        return new VeroDataBuilder().of(param);
     }
 
     public static VeroData empty() {

@@ -165,8 +165,14 @@ abstract class BaseHttpApi extends Key {
     }
 
     VeroData createVeroData(Param<?>... params) {
-        VeroData veroData = VeroData.of().build();
-        return veroData.addAll(params);
+        if (params != null && params.length > 0) {
+            VeroData.VeroDataBuilder builder = VeroData.of(params[0]);
+            for (int i = 1; i < params.length; i++) {
+                builder = builder.of(params[i]);
+            }
+            return builder.build();
+        }
+        return VeroData.empty();
     }
 
     String createUrlWithParams(String url, String paramsValues) {
