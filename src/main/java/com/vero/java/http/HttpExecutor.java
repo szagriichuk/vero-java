@@ -17,16 +17,17 @@ import java.io.IOException;
  * @author szagriichuk.
  */
 public final class HttpExecutor {
-    private static CloseableHttpAsyncClient httpAsyncClient = HttpAsyncClients.createDefault();
 
     public static void execute(HttpRequestBase method, final TextResponseCallBack callback) {
-        startAsyncClient();
+        final CloseableHttpAsyncClient httpAsyncClient = HttpAsyncClients.createDefault();
+        httpAsyncClient.start();
         httpAsyncClient.execute(method, new FutureCallback<HttpResponse>() {
             @Override
             public void completed(HttpResponse result) {
                 checkIfStatusIsSuccess(result);
                 try {
                     callback.onComplete(EntityUtils.toString(result.getEntity()));
+                    close(httpAsyncClient, callback);
                 } catch (IOException e) {
                     failed(e);
                 }
@@ -40,6 +41,7 @@ public final class HttpExecutor {
             @Override
             public void failed(Exception ex) {
                 callback.onError(ex);
+                close(httpAsyncClient, callback);
             }
 
             @Override
@@ -49,9 +51,11 @@ public final class HttpExecutor {
         });
     }
 
-    private static void startAsyncClient() {
-        if (!httpAsyncClient.isRunning()) {
-            httpAsyncClient.start();
+    private static void close(CloseableHttpAsyncClient httpAsyncClient, TextResponseCallBack callback) {
+        try {
+            httpAsyncClient.close();
+        } catch (IOException e) {
+            callback.onError(e);
         }
     }
 }
