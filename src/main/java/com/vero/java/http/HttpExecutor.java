@@ -1,6 +1,7 @@
 package com.vero.java.http;
 
 import com.vero.java.http.callback.TextResponseCallBack;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -25,11 +26,21 @@ public final class HttpExecutor {
             @Override
             public void completed(HttpResponse result) {
                 checkIfStatusIsSuccess(result);
+                HttpEntity entity = null;
                 try {
-                    callback.onComplete(EntityUtils.toString(result.getEntity()));
+                    entity = result.getEntity();
+                    callback.onComplete(EntityUtils.toString(entity));
                     close(httpAsyncClient, callback);
                 } catch (IOException e) {
                     failed(e);
+                }finally {
+                    try {
+                        if (entity != null) {
+                            entity.getContent().close();
+                        }
+                    } catch (IOException e) {
+                        // do nothing
+                    }
                 }
             }
 
